@@ -9,7 +9,7 @@
 --    - LEADER + x: Close the current pane (with confirmation).
 --    - LEADER + p: Switch to the previous tab.
 --    - LEADER + n: Switch to the next tab.
---    - LEADER + <number>: Switch to a specific tab (0–9).
+--    - Leader + ,: Rename the current pane
 
 -- 2. Pane Splitting:
 --    - LEADER + |: Split the current pane horizontally into two panes.
@@ -81,6 +81,18 @@ config.keys = {
 		mods = "LEADER",
 		key = "n",
 		action = wezterm.action.ActivateTabRelative(1),
+	},
+	{
+		key = ",",
+		mods = "LEADER",
+		action = wezterm.action.PromptInputLine({
+			description = "Enter new name for tab",
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
 	},
 	{
 		mods = "LEADER",
