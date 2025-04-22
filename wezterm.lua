@@ -6,9 +6,8 @@
 
 -- Keybindings:
 -- 1. Tab Management:
---    - LEADER + c: Create a new tab in the current pane's domain.
 --    - LEADER + x: Close the current pane (with confirmation).
---    - LEADER + b: Switch to the previous tab.
+--    - LEADER + p: Switch to the previous tab.
 --    - LEADER + n: Switch to the next tab.
 --    - LEADER + <number>: Switch to a specific tab (0–9).
 
@@ -29,7 +28,10 @@
 --    - LEADER + DownArrow: Increase the pane size downward by 5 units.
 --    - LEADER + UpArrow: Increase the pane size upward by 5 units.
 
--- 5. Status Line:
+-- 5. Copy Mode:
+--    - LEADER + [: Enter copy mode to select and copy text.
+
+-- 6. Status Line:
 --    - The status line indicates when the leader key is active, displaying an ocean wave emoji (🌊).
 
 -- Miscellaneous Configurations:
@@ -59,11 +61,6 @@ config.window_decorations = "RESIZE"
 -- tmux
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
-	{
-		mods = "LEADER",
-		key = "c",
-		action = wezterm.action.SpawnTab("CurrentPaneDomain"),
-	},
 	{
 		mods = "LEADER",
 		key = "x",
@@ -134,6 +131,11 @@ config.keys = {
 		mods = "LEADER",
 		key = "UpArrow",
 		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
+	},
+	{
+		mods = "LEADER",
+		key = "[",
+		action = wezterm.action.ActivateCopyMode,
 	},
 }
 
