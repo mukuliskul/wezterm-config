@@ -1,44 +1,3 @@
--- WezTerm Keybindings Documentation
--- ===================================================
--- Leader Key:
--- The leader key is set to CTRL + a, with a timeout of 2000 milliseconds (2 seconds).
--- To execute any keybinding, press the leader key (CTRL + a) first, then the corresponding key.
-
--- Keybindings:
--- 1. Tab Management:
---    - LEADER + x: Close the current pane (with confirmation).
---    - LEADER + p: Switch to the previous tab.
---    - LEADER + n: Switch to the next tab.
---    - Leader + ,: Rename the current pane
-
--- 2. Pane Splitting:
---    - LEADER + |: Split the current pane horizontally into two panes.
---    - LEADER + -: Split the current pane vertically into two panes.
-
--- 3. Pane Navigation:
---    - LEADER + h: Move to the pane on the left.
---    - LEADER + j: Move to the pane below.
---    - LEADER + k: Move to the pane above.
---    - LEADER + l: Move to the pane on the right.
---    - LEADER + m: Toggle zoom state of the current pane (maximize/minimize).
-
--- 4. Pane Resizing:
---    - LEADER + LeftArrow: Increase the pane size to the left by 5 units.
---    - LEADER + RightArrow: Increase the pane size to the right by 5 units.
---    - LEADER + DownArrow: Increase the pane size downward by 5 units.
---    - LEADER + UpArrow: Increase the pane size upward by 5 units.
-
--- 5. Copy Mode:
---    - LEADER + [: Enter copy mode to select and copy text.
-
--- 6. Status Line:
---    - The status line indicates when the leader key is active, displaying an ocean wave emoji (🌊).
-
--- Miscellaneous Configurations:
--- - Tabs are shown even if there's only one tab.
--- - The tab bar is located at the bottom of the terminal window.
--- - Tab and split indices are zero-based.
-
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
@@ -104,46 +63,46 @@ config.keys = {
 		key = "-",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
-	{
-		mods = "CTRL",
-		key = "h",
-		action = wezterm.action.ActivatePaneDirection("Left"),
-	},
-	{
-		mods = "CTRL",
-		key = "j",
-		action = wezterm.action.ActivatePaneDirection("Down"),
-	},
-	{
-		mods = "CTRL",
-		key = "k",
-		action = wezterm.action.ActivatePaneDirection("Up"),
-	},
-	{
-		mods = "CTRL",
-		key = "l",
-		action = wezterm.action.ActivatePaneDirection("Right"),
-	},
-	{
-		mods = "LEADER",
-		key = "h",
-		action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
-	},
-	{
-		mods = "LEADER",
-		key = "l",
-		action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
-	},
-	{
-		mods = "LEADER",
-		key = "j",
-		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
-	},
-	{
-		mods = "LEADER",
-		key = "k",
-		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
-	},
+	-- {
+	-- 	mods = "CTRL",
+	-- 	key = "h",
+	-- 	action = wezterm.action.ActivatePaneDirection("Left"),
+	-- },
+	-- {
+	-- 	mods = "CTRL",
+	-- 	key = "j",
+	-- 	action = wezterm.action.ActivatePaneDirection("Down"),
+	-- },
+	-- {
+	-- 	mods = "CTRL",
+	-- 	key = "k",
+	-- 	action = wezterm.action.ActivatePaneDirection("Up"),
+	-- },
+	-- {
+	-- 	mods = "CTRL",
+	-- 	key = "l",
+	-- 	action = wezterm.action.ActivatePaneDirection("Right"),
+	-- },
+	-- {
+	-- 	mods = "LEADER",
+	-- 	key = "h",
+	-- 	action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
+	-- },
+	-- {
+	-- 	mods = "LEADER",
+	-- 	key = "l",
+	-- 	action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
+	-- },
+	-- {
+	-- 	mods = "LEADER",
+	-- 	key = "j",
+	-- 	action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
+	-- },
+	-- {
+	-- 	mods = "LEADER",
+	-- 	key = "k",
+	-- 	action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
+	-- },
 	{
 		mods = "LEADER",
 		key = "[",
@@ -178,6 +137,10 @@ wezterm.on("update-right-status", function(window, _)
 		{ Text = SOLID_LEFT_ARROW },
 	}))
 end)
+
+-- smart-splits
+local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
+smart_splits.apply_to_config(config)
 
 -- and finally, return the configuration to wezterm
 return config
