@@ -139,15 +139,6 @@ config.keys = {
 	},
 }
 
-for i = 0, 9 do
-	-- leader + number to activate that tab
-	table.insert(config.keys, {
-		key = tostring(i),
-		mods = "LEADER",
-		action = wezterm.action.ActivateTab(i),
-	})
-end
-
 -- tab bar
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = true
