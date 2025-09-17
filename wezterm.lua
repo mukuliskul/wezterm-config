@@ -12,7 +12,10 @@ end
 
 -- For example, changing the color scheme:
 config.color_scheme = "Catppuccin Macchiato"
-config.font = wezterm.font("JetBrains Mono NL")
+config.font = wezterm.font("JetBrains Mono NL", {
+	weight = "Regular",
+	style = "Normal",
+})
 config.font_size = 16
 
 config.window_decorations = "RESIZE"
