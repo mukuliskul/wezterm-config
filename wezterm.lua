@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local mux = wezterm.mux
 
 -- This table will hold the configuration.
 local config = {}
@@ -71,6 +72,11 @@ config.keys = {
 		key = "[",
 		action = wezterm.action.ActivateCopyMode,
 	},
+	{
+		mods = "LEADER",
+		key = "L",
+		action = wezterm.action.EmitEvent("do-my-layout"),
+	},
 }
 
 -- tab bar
@@ -104,6 +110,51 @@ end)
 -- smart-splits
 local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 smart_splits.apply_to_config(config)
+
+wezterm.on("do-my-layout", function(window, pane)
+	-- `window, pane` here refer to the window/pane where the key was pressed
+	-- but we want to spawn a new window layout maybe. You can use mux.spawn_window.
+
+	local cwd = wezterm.home_dir -- adjust if needed
+
+	-- spawn new window and main tab/pane
+	local tab, main_pane, new_window = mux.spawn_window({ cwd = cwd })
+
+	-- top/main: cd local-dev then awslogin
+	main_pane:send_text("cd local-dev\n")
+	main_pane:send_text("awslogin\n")
+
+	-- split down
+	local bottom_pane = main_pane:split({
+		direction = "Bottom",
+		size = 0.5,
+		cwd = cwd,
+	})
+	bottom_pane:send_text("cd local-dev\n")
+	bottom_pane:send_text("dcdpu\n")
+
+	-- split bottom pane to right
+	local bottom_right = bottom_pane:split({
+		direction = "Right",
+		size = 0.5,
+		cwd = cwd,
+	})
+	bottom_right:send_text("cd cosmos\n")
+	bottom_right:send_text("./start_test_container.sh\n")
+
+	-- new tab at end
+	local new_tab, tab_pane, _ = new_window:spawn_tab({ cwd = cwd })
+	tab_pane:send_text("cd cosmos\n")
+	tab_pane:send_text("nvim\n")
+
+	-- maximize
+	-- new_window:gui_window():maximize()
+end)
+
+-- This will run when wezterm starts up
+wezterm.on("gui-startup", function(cmd)
+	wezterm.emit("do-my-layout", nil, nil)
+end)
 
 -- and finally, return the configuration to wezterm
 return config
