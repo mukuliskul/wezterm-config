@@ -123,6 +123,7 @@ wezterm.on("do-my-layout", function(window, pane)
 	-- top/main: cd local-dev then awslogin
 	main_pane:send_text("cd local-dev\n")
 	main_pane:send_text("awslogin\n")
+	main_pane:send_text("nvim\n")
 
 	-- split down
 	local bottom_pane = main_pane:split({
