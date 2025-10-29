@@ -21,7 +21,7 @@ function scheme_for_appearance(appearance)
 end
 
 config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
-config.font = wezterm.font("JetBrains Mono NL", {
+config.font = wezterm.font("Hack", {
 	weight = "Regular",
 	style = "Normal",
 })
