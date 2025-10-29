@@ -129,7 +129,7 @@ wezterm.on("do-my-layout", function(window, pane)
 	local tab, main_pane, new_window = mux.spawn_window({ cwd = cwd })
 
 	-- top/main: cd local-dev then awslogin
-	main_pane:send_text("cd local-dev\n")
+	main_pane:send_text("cd ~/mpac-commercial/projects/local-dev\n")
 	main_pane:send_text("awslogin\n")
 	main_pane:send_text("nvim\n")
 
@@ -139,7 +139,7 @@ wezterm.on("do-my-layout", function(window, pane)
 		size = 0.5,
 		cwd = cwd,
 	})
-	bottom_pane:send_text("cd local-dev\n")
+	bottom_pane:send_text("cd ~/mpac-commercial/projects/local-dev\n")
 	bottom_pane:send_text("dcdpu\n")
 
 	-- split bottom pane to right
@@ -148,12 +148,12 @@ wezterm.on("do-my-layout", function(window, pane)
 		size = 0.5,
 		cwd = cwd,
 	})
-	bottom_right:send_text("cd cosmos\n")
+	bottom_right:send_text("cd ~/mpac-commercial/projects/cosmos\n")
 	bottom_right:send_text("./start_test_container.sh\n")
 
 	-- new tab at end
 	local new_tab, tab_pane, _ = new_window:spawn_tab({ cwd = cwd })
-	tab_pane:send_text("cd cosmos\n")
+	tab_pane:send_text("cd ~/mpac-commercial/projects/cosmos\n")
 	tab_pane:send_text("nvim\n")
 
 	-- maximize
