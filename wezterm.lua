@@ -14,9 +14,9 @@ end
 -- For example, changing the color scheme:
 function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		return "Catppuccin Mocha"
+		return "kanagawabones"
 	else
-		return "Catppuccin Latte"
+		return "Vs Code Light+ (Gogh)"
 	end
 end
 
