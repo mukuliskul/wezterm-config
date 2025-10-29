@@ -12,7 +12,15 @@ if wezterm.config_builder then
 end
 
 -- For example, changing the color scheme:
-config.color_scheme = "Catppuccin Macchiato"
+function scheme_for_appearance(appearance)
+	if appearance:find("Dark") then
+		return "Catppuccin Mocha"
+	else
+		return "Catppuccin Latte"
+	end
+end
+
+config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 config.font = wezterm.font("JetBrains Mono NL", {
 	weight = "Regular",
 	style = "Normal",
