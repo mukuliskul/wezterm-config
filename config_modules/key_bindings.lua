@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local projects = require("config_modules.projects")
 
 return {
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 },
@@ -24,6 +25,16 @@ return {
 					end
 				end),
 			}),
+		},
+		{
+			mods = "LEADER",
+			key = "p",
+			action = projects.choose_project(),
+		},
+		{
+			mods = "LEADER",
+			key = "f",
+			action = wezterm.action.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" },
 		},
 		{
 			mods = "LEADER",
