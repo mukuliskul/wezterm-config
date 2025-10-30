@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local projects = require("projects")
 local mux = wezterm.mux
 
 -- This table will hold the configuration.
@@ -12,26 +13,38 @@ if wezterm.config_builder then
 end
 
 -- For example, changing the color scheme:
-function scheme_for_appearance(appearance)
-	if appearance:find("Dark") then
-		return "kanagawabones"
-	else
-		return "Vs Code Light+ (Gogh)"
-	end
-end
+-- function scheme_for_appearance(appearance)
+-- 	if appearance:find("Dark") then
+-- 		return "kanagawabones"
+-- 	else
+-- 		return "Vs Code Light+ (Gogh)"
+-- 	end
+-- end
 
-config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+config.color_scheme = "kanagawabones"
 config.font = wezterm.font("Source Code Pro", {
 	weight = "Regular",
 	style = "Normal",
 })
-config.font_size = 16
+config.font_size = 14
 
 config.window_decorations = "RESIZE"
 
 -- tmux
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
+	{
+		key = "p",
+		mods = "LEADER",
+		-- Present in to our project picker
+		action = projects.choose_project(),
+	},
+	{
+		key = "f",
+		mods = "LEADER",
+		-- Present a list of existing workspaces
+		action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+	},
 	{
 		mods = "LEADER",
 		key = "x",
@@ -42,16 +55,6 @@ config.keys = {
 		mods = "LEADER",
 		key = "m",
 		action = wezterm.action.TogglePaneZoomState,
-	},
-	{
-		mods = "LEADER",
-		key = "p",
-		action = wezterm.action.ActivateTabRelative(-1),
-	},
-	{
-		mods = "LEADER",
-		key = "n",
-		action = wezterm.action.ActivateTabRelative(1),
 	},
 	{
 		key = ",",
