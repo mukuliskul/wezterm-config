@@ -1,7 +1,18 @@
 local wezterm = require("wezterm")
 
+-- Function to determine color scheme based on system appearance
+local function get_color_scheme()
+	local appearance = wezterm.gui and wezterm.gui.get_appearance() or "Dark"
+
+	if appearance:find("Dark") then
+		return "kanagawabones" -- Your preferred dark theme
+	else
+		return "rose-pine-dawn" -- Rose Pine light theme
+	end
+end
+
 return {
-	color_scheme = "kanagawabones",
+	color_scheme = get_color_scheme(),
 	font = wezterm.font("Source Code Pro", {
 		weight = "Regular",
 		style = "Normal",
