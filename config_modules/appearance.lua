@@ -7,7 +7,7 @@ local function get_color_scheme()
 	if appearance:find("Dark") then
 		return "kanagawabones" -- Your preferred dark theme
 	else
-		return "rose-pine-dawn" -- Rose Pine light theme
+		return "One Light (Gogh)" -- Soft, balanced light theme from Atom One
 	end
 end
 
