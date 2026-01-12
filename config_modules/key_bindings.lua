@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local projects = require("config_modules.projects")
+local workspace_switcher = require("config_modules.workspace_switcher")
 
 return {
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 },
@@ -29,7 +29,7 @@ return {
 		{
 			mods = "LEADER",
 			key = "p",
-			action = projects.choose_project(),
+			action = workspace_switcher.choose_project(),
 		},
 		{
 			mods = "LEADER",
