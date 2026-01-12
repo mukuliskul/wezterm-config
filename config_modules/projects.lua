@@ -7,6 +7,10 @@ local project_dir = wezterm.home_dir .. "/mpac-commercial/projects"
 function module.choose_project()
 	return wezterm.action_callback(function(window, pane)
 		local projects = { wezterm.home_dir }
+		-- Add .config subdirectories
+		for _, dir in ipairs(wezterm.glob(wezterm.home_dir .. "/.config/*")) do
+			table.insert(projects, dir)
+		end
 		for _, dir in ipairs(wezterm.glob(project_dir .. "/*")) do
 			table.insert(projects, dir)
 		end
