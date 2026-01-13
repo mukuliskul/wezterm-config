@@ -23,6 +23,5 @@ return {
 	-- Performance optimizations
 	front_end = "WebGpu",
 	max_fps = 60,
-	webgpu_present_mode = "Mailbox",
 	freetype_load_target = "Normal",
 }
