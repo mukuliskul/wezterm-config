@@ -7,8 +7,15 @@ local SCAN_DIRS = {
 	wezterm.home_dir .. "/.config"
 }
 
+-- Cache for workspace directories to avoid repeated scanning
+local cached_directories = nil
+
 -- Get all directories to offer as workspace options
 local function get_workspace_directories()
+	if cached_directories then
+		return cached_directories
+	end
+
 	local directories = {}
 
 	-- Always include home directory
@@ -22,6 +29,7 @@ local function get_workspace_directories()
 		end
 	end
 
+	cached_directories = directories
 	return directories
 end
 

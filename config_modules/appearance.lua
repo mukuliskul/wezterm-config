@@ -13,10 +13,16 @@ end
 
 return {
 	color_scheme = get_color_scheme(),
-	font = wezterm.font("Source Code Pro", {
-		weight = "Regular",
-		style = "Normal",
+	font = wezterm.font_with_fallback({
+		"Source Code Pro",
+		"JetBrains Mono",
+		"Fira Code",
 	}),
 	font_size = 14,
 	window_decorations = "RESIZE",
+	-- Performance optimizations
+	front_end = "WebGpu",
+	max_fps = 60,
+	webgpu_present_mode = "Mailbox",
+	freetype_load_target = "Normal",
 }
