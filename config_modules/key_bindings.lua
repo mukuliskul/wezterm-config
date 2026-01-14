@@ -34,7 +34,7 @@ local workspace_switcher = require("config_modules.workspace_switcher")
 			{
 				mods = "LEADER",
 				key = "f",
-				action = wezterm.action.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" },
+				action = workspace_switcher.show_workspace_selector(),
 			},
 			{
 				mods = "LEADER",

@@ -72,8 +72,8 @@ function module.choose_project()
 		local choices = {}
 
 		-- Convert directories to choice format for the picker
-		for _, dir_path in ipairs(directories) do
-			table.insert(choices, { label = dir_path })
+		for i, dir_path in ipairs(directories) do
+			table.insert(choices, { label = i .. ". " .. dir_path })
 		end
 
 		-- Show the directory picker with fuzzy search
@@ -94,6 +94,44 @@ function module.choose_project()
 							name = get_workspace_name(label),
 							spawn = { cwd = label },
 						}),
+						child_pane
+					)
+				end),
+			}),
+			pane
+		)
+	end)
+end
+
+-- Show workspace selector with numbered options
+function module.show_workspace_selector()
+	return wezterm.action_callback(function(window, pane)
+		local workspaces = wezterm.mux.get_workspace_names()
+		table.sort(workspaces)  -- alphabetical order
+
+		if #workspaces == 0 then
+			return
+		end
+
+		local choices = {}
+		for i, ws_name in ipairs(workspaces) do
+			table.insert(choices, {
+				label = i .. ". " .. ws_name,
+				id = ws_name
+			})
+		end
+
+		window:perform_action(
+			wezterm.action.InputSelector({
+				title = "Choose Workspace",
+				choices = choices,
+				fuzzy = true,
+				action = wezterm.action_callback(function(child_window, child_pane, id, label)
+					if not id then
+						return
+					end
+					child_window:perform_action(
+						wezterm.action.SwitchToWorkspace({ name = id }),
 						child_pane
 					)
 				end),
