@@ -103,33 +103,16 @@ function module.choose_project()
 	end)
 end
 
--- Switch to last workspace
-function module.switch_to_last_workspace()
-	return wezterm.action_callback(function(window, pane)
-		local last_workspace = read_last_workspace()
-		local current = window:active_workspace()
-		
-		if not last_workspace or last_workspace == current then
-			return
-		end
-		
-		window:perform_action(
-			wezterm.action.SwitchToWorkspace({ name = last_workspace }),
-			pane
-		)
-	end)
-end
-
 -- Cycle workspaces forward
 function module.cycle_workspaces_forward()
 	return wezterm.action_callback(function(window, pane)
 		local workspaces = wezterm.mux.get_workspace_names()
 		table.sort(workspaces)  -- alphabetical order
-		
+
 		if #workspaces <= 1 then
 			return
 		end
-		
+
 		local current = window:active_workspace()
 		local current_index = nil
 		for i, ws in ipairs(workspaces) do
@@ -138,12 +121,12 @@ function module.cycle_workspaces_forward()
 				break
 			end
 		end
-		
+
 		if not current_index then return end  -- shouldn't happen
-		
+
 		local next_index = current_index % #workspaces + 1
 		local next_workspace = workspaces[next_index]
-		
+
 		window:perform_action(
 			wezterm.action.SwitchToWorkspace({ name = next_workspace }),
 			pane
@@ -156,11 +139,11 @@ function module.cycle_workspaces_backward()
 	return wezterm.action_callback(function(window, pane)
 		local workspaces = wezterm.mux.get_workspace_names()
 		table.sort(workspaces)  -- alphabetical order
-		
+
 		if #workspaces <= 1 then
 			return
 		end
-		
+
 		local current = window:active_workspace()
 		local current_index = nil
 		for i, ws in ipairs(workspaces) do
@@ -169,12 +152,12 @@ function module.cycle_workspaces_backward()
 				break
 			end
 		end
-		
+
 		if not current_index then return end
-		
+
 		local prev_index = (current_index - 2) % #workspaces + 1
 		local prev_workspace = workspaces[prev_index]
-		
+
 		window:perform_action(
 			wezterm.action.SwitchToWorkspace({ name = prev_workspace }),
 			pane

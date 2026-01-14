@@ -53,11 +53,6 @@ local workspace_switcher = require("config_modules.workspace_switcher")
 			},
 			{
 				mods = "LEADER",
-				key = "l",
-				action = workspace_switcher.switch_to_last_workspace(),
-			},
-			{
-				mods = "LEADER",
 				key = "j",
 				action = workspace_switcher.cycle_workspaces_forward(),
 			},
