@@ -61,5 +61,25 @@ local workspace_switcher = require("config_modules.workspace_switcher")
 				key = "k",
 				action = workspace_switcher.cycle_workspaces_backward(),
 			},
+			{
+				key = "h",
+				mods = "CTRL",
+				action = wezterm.action.ActivatePaneDirection("Left"),
+			},
+			{
+				key = "j",
+				mods = "CTRL",
+				action = wezterm.action.ActivatePaneDirection("Down"),
+			},
+			{
+				key = "k",
+				mods = "CTRL",
+				action = wezterm.action.ActivatePaneDirection("Up"),
+			},
+			{
+				key = "l",
+				mods = "CTRL",
+				action = wezterm.action.ActivatePaneDirection("Right"),
+			},
 		},
 	}
