@@ -28,7 +28,7 @@ local workspace_switcher = require("config_modules.workspace_switcher")
 			},
 			{
 				mods = "LEADER",
-				key = "p",
+				key = "l",
 				action = workspace_switcher.choose_project(),
 			},
 			{

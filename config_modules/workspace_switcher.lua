@@ -73,7 +73,7 @@ function module.choose_project()
 
 		-- Convert directories to choice format for the picker
 		for i, dir_path in ipairs(directories) do
-			table.insert(choices, { label = i .. ". " .. dir_path })
+			table.insert(choices, { label = i .. ". " .. dir_path, id = dir_path })
 		end
 
 		-- Show the directory picker with fuzzy search
@@ -84,15 +84,15 @@ function module.choose_project()
 				fuzzy = true,
 				action = wezterm.action_callback(function(child_window, child_pane, id, label)
 					-- Skip if nothing was selected
-					if not label then
+					if not id then
 						return
 					end
 
 					-- Switch to workspace for selected directory
 					child_window:perform_action(
 						wezterm.action.SwitchToWorkspace({
-							name = get_workspace_name(label),
-							spawn = { cwd = label },
+							name = get_workspace_name(id),
+							spawn = { cwd = id },
 						}),
 						child_pane
 					)
