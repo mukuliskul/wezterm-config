@@ -60,9 +60,9 @@ local workspace_switcher = require("config_modules.workspace_switcher")
 				mods = "LEADER",
 				key = "k",
 				action = workspace_switcher.cycle_workspaces_backward(),
-			},
-			{
-				key = "h",
+      },
+      {
+        key = "h",
 				mods = "CTRL",
 				action = wezterm.action.ActivatePaneDirection("Left"),
 			},
@@ -80,6 +80,27 @@ local workspace_switcher = require("config_modules.workspace_switcher")
 				key = "l",
 				mods = "CTRL",
 				action = wezterm.action.ActivatePaneDirection("Right"),
+			},
+            -- Resize panes with Alt (Option) + Arrow (5-cell steps)
+			{
+				key = "LeftArrow",
+				mods = "META",
+				action = wezterm.action.AdjustPaneSize{"Left", 5},
+			},
+			{
+				key = "RightArrow",
+				mods = "META",
+				action = wezterm.action.AdjustPaneSize{"Right", 5},
+			},
+			{
+				key = "UpArrow",
+				mods = "META",
+				action = wezterm.action.AdjustPaneSize{"Up", 5},
+			},
+			{
+				key = "DownArrow",
+				mods = "META",
+				action = wezterm.action.AdjustPaneSize{"Down", 5},
 			},
 		},
 	}
