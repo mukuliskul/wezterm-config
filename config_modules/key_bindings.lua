@@ -81,25 +81,25 @@ local workspace_switcher = require("config_modules.workspace_switcher")
 				mods = "CTRL",
 				action = wezterm.action.ActivatePaneDirection("Right"),
 			},
-            -- Resize panes with Alt (Option) + Arrow (5-cell steps)
+            -- Resize panes with Ctrl+Shift + Arrow (5-cell steps)
 			{
 				key = "LeftArrow",
-				mods = "META",
+				mods = "CTRL|SHIFT",
 				action = wezterm.action.AdjustPaneSize{"Left", 5},
 			},
 			{
 				key = "RightArrow",
-				mods = "META",
+				mods = "CTRL|SHIFT",
 				action = wezterm.action.AdjustPaneSize{"Right", 5},
 			},
 			{
 				key = "UpArrow",
-				mods = "META",
+				mods = "CTRL|SHIFT",
 				action = wezterm.action.AdjustPaneSize{"Up", 5},
 			},
 			{
 				key = "DownArrow",
-				mods = "META",
+				mods = "CTRL|SHIFT",
 				action = wezterm.action.AdjustPaneSize{"Down", 5},
 			},
 		},
