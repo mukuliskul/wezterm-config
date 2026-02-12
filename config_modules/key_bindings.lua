@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
 
 return {
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 },
@@ -80,6 +81,16 @@ return {
 			key = "DownArrow",
 			mods = "CTRL|SHIFT",
 			action = wezterm.action.AdjustPaneSize{"Down", 5},
+		},
+		{
+			key = "l",
+			mods = "LEADER",
+			action = workspace_switcher.switch_workspace(),
+		},
+		{
+			key = "j",
+			mods = "LEADER",
+			action = workspace_switcher.switch_to_prev_workspace(),
 		},
 	},
 }
