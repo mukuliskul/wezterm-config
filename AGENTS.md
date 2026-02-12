@@ -12,7 +12,6 @@ This is a WezTerm terminal emulator configuration written in Lua. The configurat
   - `tab_bar.lua` - Tab bar styling
   - `events.lua` - Event handlers
   - `plugins.lua` - Plugin management
-  - `workspace_switcher.lua` - Workspace/project switching functionality
 
 ## Testing & Validation
 
@@ -34,9 +33,8 @@ wezterm --config-file wezterm.lua
 When making changes, verify:
 1. Configuration loads without errors
 2. Key bindings work as expected
-3. Workspace switching functions correctly
-4. Visual appearance renders properly
-5. No performance regressions
+3. Visual appearance renders properly
+4. No performance regressions
 
 ## Code Style Guidelines
 
@@ -61,7 +59,7 @@ When making changes, verify:
 #### Naming Conventions
 - `snake_case` for variables, functions, and file names
 - `UPPER_SNAKE_CASE` for constants
-- Descriptive names (e.g., `get_workspace_directories`, not `getWsDirs`)
+- Descriptive names (e.g., `get_project_dirs`, not `getWsDirs`)
 
 #### Variables & Scope
 - Prefer `local` variables to avoid polluting global scope
@@ -77,16 +75,6 @@ local module = {}
 wezterm = require("wezterm")
 ```
 
-#### Comments
-- Use `--` for single-line comments
-- Comment complex logic and non-obvious decisions
-- Include section headers for major blocks
-
-```lua
--- Configuration: Directories to scan for projects and configs
-local SCAN_DIRS = { ... }
-```
-
 #### Functions
 - Define module functions using dot notation: `function module.function_name()`
 - Use descriptive parameter names
@@ -94,10 +82,8 @@ local SCAN_DIRS = { ... }
 
 ```lua
 -- Good
-function module.choose_project()
-	return wezterm.action_callback(function(window, pane)
-		-- implementation
-	end)
+function module.some_function()
+	-- implementation
 end
 ```
 
@@ -173,15 +159,6 @@ local wezterm = require("wezterm")
 
 #### Action Callbacks
 Use `wezterm.action_callback` for interactive actions:
-```lua
-{
-	mods = "LEADER",
-	key = "l",
-	action = wezterm.action_callback(function(window, pane)
-		-- implementation
-	end),
-}
-```
 
 #### Config Builder
 Main config should use the config builder pattern:
@@ -193,7 +170,6 @@ end
 ```
 
 ### Performance Considerations
-- Cache expensive operations (see `cached_directories` in workspace_switcher.lua:11)
 - Limit scrollback to reasonable values (10,000 lines)
 - Use appropriate rendering backend (`WebGpu` for performance)
 - Be mindful of event handler performance (they run frequently)
@@ -233,12 +209,6 @@ return nil
 3. Import in `wezterm.lua` using appropriate pattern
 4. Test configuration loading
 
-### Modifying Workspace Behavior
-1. Edit `config_modules/workspace_switcher.lua`
-2. Update `SCAN_DIRS` for project directories
-3. Modify helper functions as needed
-4. Test workspace switching with Leader+l
-
 ## Git Workflow
 - Commit messages should be descriptive
 - Test configuration before committing
@@ -248,5 +218,4 @@ return nil
 ## Additional Notes
 - WezTerm documentation: https://wezfurlong.org/wezterm/
 - This config uses a leader key pattern (Ctrl+A, similar to tmux)
-- Workspace switching is a custom feature for project management
 - Performance optimizations are in place (WebGpu, 60fps limit, 10k scrollback)
